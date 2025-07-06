@@ -2,17 +2,26 @@ import time
 import sys
 import board
 import adafruit_dht
+from RPLCD.i2c import CharLCD
 
 def test_dht11():
     # Initial the dht device, with data pin connected to:
     dhtDevice = adafruit_dht.DHT11(board.D23)
-
+    #Inicializa LCD
+    lcd = CharLCD(i2c_expander='PCF8574',address=0x27,port=1,cols=16, 
+                  dotsize=8, charmap='A00',auto_linebreaks=True)
+    
     try:
         while True:
             try:
                 temperature_c = dhtDevice.temperature
                 humidity = dhtDevice.humidity
                 print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}% ")
+                #muestra en pantalla LCD
+                lcd.clear()
+                lcd.write_string(f"T:{temperature_c:.1f}C H:{humidity}%")
+                lcd.crlf()
+
             except RuntimeError as error:
                 print(error.args[0])
             time.sleep(5.0)
@@ -68,12 +77,11 @@ def test_lcd():
                       charmap='A00', auto_linebreaks=True)
 
         lcd.clear()
-        lcd.write_string("LCD funcionando")
+        lcd.write_string("LCD Funcionando")
         lcd.crlf()
-        lcd.write_string("Test exitoso!")
-        print("\n✅ LCD OK - Mensaje mostrado en pantalla.\n")
+        lcd.write_string("Test exitoso :D")
+        print("\n✅ LCD OK - LCD FUNCIONANDO.\n")
         time.sleep(3)
-        lcd.clear()
     except Exception as e:
         print(f"\n❌ Error con LCD: {e}\n")
 
