@@ -24,25 +24,29 @@ def test_dht11():
 def test_bmp280():
     try:
         import board
-        import busio
         import adafruit_bmp280
 
-        i2c = busio.I2C(board.SCL, board.SDA)
-        bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
+        # Initialize I2C bus
+        i2c = board.I2C()
 
-        temp = bmp.temperature
-        pressure = bmp.pressure
+        # Create BMP280 object
+        bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c,address=0x77)
 
-        print(f"\n✅ BMP280 - Temp: {temp:.1f}°C | Presión: {pressure:.1f} hPa\n")
-    except Exception as e:
-        print(f"\n❌ Error con BMP280: {e}\n")
+        while True:
+            temp = bmp.temperature
+            pressure = bmp.pressure
+            print(f"Temp: {temp:.1f} C    Pressure: {pressure:.1f}hPa")
+            time.sleep(5.0)
+
+    except KeyboardInterrupt:
+        print("\n[✔] Lectura de BMP280 interrumpida por el usuario.")
 
 
 def test_rain_sensor():
     try:
         import RPi.GPIO as GPIO
 
-        RAIN_PIN = 17
+        RAIN_PIN = 24
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(RAIN_PIN, GPIO.IN)
 
