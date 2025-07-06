@@ -1,10 +1,4 @@
 try:
-    import Adafruit_DHT
-    print("✅ Adafruit_DHT imported successfully")
-except ImportError as e:
-    print("❌ Adafruit_DHT failed:", e)
-
-try:
     import RPi.GPIO as GPIO
     print("✅ RPi.GPIO imported successfully")
 except ImportError as e:
