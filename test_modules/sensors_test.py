@@ -1,23 +1,24 @@
 import time
 import sys
+import board
+import adafruit_dht
 
 def test_dht11():
-    try:
-        import Adafruit_DHT
-        DHT_SENSOR = Adafruit_DHT.DHT11
-        DHT_PIN = 4
+    # Initial the dht device, with data pin connected to:
+    dhtDevice = adafruit_dht.DHT11(board.D23)
 
-        humidity, temperature = Adafruit_DHT.read_retry(DHT_SENSOR, DHT_PIN)
-        if humidity is not None and temperature is not None:
-            print(f"\n✅ DHT11 - Temperatura: {temperature:.1f}°C | Humedad: {humidity:.1f}%\n")
-        else:
-            print("\n⚠️ No se pudo leer el sensor DHT11. Verifique la conexión.\n")
-    except RuntimeError as e:
-        print(f"\n❌ Error en plataforma DHT11: {e}\n")
-    except ImportError as e:
-        print(f"\n❌ Módulo Adafruit_DHT no encontrado: {e}\n")
-    except Exception as e:
-        print(f"\n❌ Error inesperado con DHT11: {e}\n")
+    try:
+        while True:
+            try:
+                temperature_c = dhtDevice.temperature
+                humidity = dhtDevice.humidity
+                print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}% ")
+            except RuntimeError as error:
+                print(error.args[0])
+            time.sleep(5.0)
+
+    except KeyboardInterrupt:
+        print("\n[✔] Lectura de DHT11 interrumpida por el usuario.")
 
 
 def test_bmp280():
