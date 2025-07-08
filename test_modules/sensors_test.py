@@ -38,6 +38,10 @@ def test_bmp280():
         # Initialize I2C bus
         i2c = board.I2C()
 
+        #inicializa la pantalla LCD
+        lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16,
+                       rows=2, dotsize=8, charmap='A00', auto_linebreaks=True)
+
         # Create BMP280 object
         bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c,address=0x77)
 
@@ -45,8 +49,15 @@ def test_bmp280():
             temp = bmp.temperature
             pressure = bmp.pressure
             print(f"Temp: {temp:.1f} C    Pressure: {pressure:.1f}hPa")
+   
+            lcd.cursor_pos=(0,0)
+            lcd.write_string(f"T:{temp:.1f}c ")
+            lcd.cursor_pos=(1,0)
+            lcd.write_string(f"P:{int(pressure)}hPa ")      
+         
             time.sleep(5.0)
-
+  
+  
     except KeyboardInterrupt:
         print("\n[✔] Lectura de BMP280 interrumpida por el usuario.")
 
@@ -55,15 +66,24 @@ def test_rain_sensor():
     try:
         import RPi.GPIO as GPIO
 
+        lcd=CharLCD(i2c_expander='PCF8574', address=0x27, cols=16, 
+                    rows=2, dotsize=8, charmap='A00', auto_linebreaks=True)        
+
         RAIN_PIN = 24
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(RAIN_PIN, GPIO.IN)
 
         state = GPIO.input(RAIN_PIN)
-        status = "Lluvia detectada" if state == 0 else "Sin lluvia"
-        print(f"\n✅ Sensor de lluvia: {status}\n")
+        lluvia = "SI" if state == 0 else "NO"
+        print(f"\n✅ Estado: R: {lluvia}\n")
         time.sleep(2)
         GPIO.cleanup()
+       
+        #Mostrar en LCD 
+        lcd.cursos_pos = (1,0)
+        lcd.write_string(f"R:{lluvia:<14}")
+
+        time.sleep(1)
     except Exception as e:
         print(f"\n❌ Error con sensor de lluvia: {e}\n")
 
