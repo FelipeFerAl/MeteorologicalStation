@@ -28,34 +28,67 @@ This project is a compact and affordable weather station built using a Raspberry
 ### Hardware Connections (GPIO and I2C)
 
 DHT11 (Temperature & Humidity)
+  
   VCC → 3.3V
+  
   DATA → GPIO 23 (board.D23)
+  
   GND → GND
 
-BMP280 (Temperature & Pressure, I2C mode)
+*BMP280 (Temperature & Pressure, I2C mode)*
+  
   VIN → 3.3V
+  
   GND → GND
+  
   SCL → GPIO 3 (I2C SCL)
+  
   SDA → GPIO 2 (I2C SDA)
 
   Default I2C address used: 0x77
 
-YL-38 Rain Sensor
+*YL-38 Rain Sensor*
+  
   DO (Digital Output) → GPIO 24
+  
   VCC → 3.3V or 5V
+  
   GND → GND
 
 The sensor sends LOW when it detects rain. No need for analog input.
 
-I2C LCD 16x2 Display
+*I2C LCD 16x2 Display*
+
   SDA → GPIO 2
+
   SCL → GPIO 3
+  
   VCC → 5V
+  
   GND → GND
 
   I2C address: 0x27
 
+### Hardware Implementation:
+
+
+
 ### Software Configuration: 
 
-** Libraries Used: **
+*Libraries Used:*
+
+- `adafruit-circuitpython-dht` – for reading DHT11 temperature/humidity sensor
+
+- `adafruit-circuitpython-bmp280` – for BMP280 pressure/temperature sensor
+
+- `RPLCD` – for controlling the I2C LCD display
+
+- `RPi.GPIO` – for reading the rain sensor (YL-38)
+
+- `board` – for identifying GPIO pin numbers in a hardware-friendly way
+
+- `time, sys` – for delays, user inputs, and graceful exits
+
+*Carpets and files*
+
 
