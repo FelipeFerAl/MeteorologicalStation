@@ -23,51 +23,53 @@ This project is a compact and affordable weather station built using a Raspberry
 
 - I2C LCD 16x2: Displays live data from the sensors.
 
+- The system starts right when the raspberry is on and the sensors asociated start to measure the desire variables.
+
 ## Project Structure: 
 
 ### Hardware Connections (GPIO and I2C)
 
-DHT11 (Temperature & Humidity)
+**DHT11 (Temperature & Humidity)**
   
-  VCC → 3.3V
+- VCC → 3.3V
   
-  DATA → GPIO 23 (board.D23)
+- DATA → GPIO 23 (board.D23)
   
-  GND → GND
+- GND → GND
 
-*BMP280 (Temperature & Pressure, I2C mode)*
+**BMP280 (Temperature & Pressure, I2C mode)**
   
-  VIN → 3.3V
+- VIN → 3.3V
   
-  GND → GND
+- GND → GND
   
-  SCL → GPIO 3 (I2C SCL)
+- SCL → GPIO 3 (I2C SCL)
   
-  SDA → GPIO 2 (I2C SDA)
+- SDA → GPIO 2 (I2C SDA)
 
-  Default I2C address used: 0x77
+- Default I2C address used: 0x77
 
-*YL-38 Rain Sensor*
+**YL-38 Rain Sensor**
   
-  DO (Digital Output) → GPIO 24
+- DO (Digital Output) → GPIO 24
   
-  VCC → 3.3V or 5V
+- VCC → 3.3V or 5V
   
-  GND → GND
+- GND → GND
 
 The sensor sends LOW when it detects rain. No need for analog input.
 
-*I2C LCD 16x2 Display*
+**I2C LCD 16x2 Display**
 
-  SDA → GPIO 2
+- SDA → GPIO 2
 
-  SCL → GPIO 3
+- SCL → GPIO 3
   
-  VCC → 5V
+- VCC → 5V
   
-  GND → GND
+- GND → GND
 
-  I2C address: 0x27
+- I2C address: 0x27
 
 ### Hardware Implementation:
 
@@ -75,7 +77,7 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 ### Software Configuration: 
 
-*Libraries Used:*
+**Libraries Used:**
 
 - `adafruit-circuitpython-dht` – for reading DHT11 temperature/humidity sensor
 
@@ -89,6 +91,21 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 - `time, sys` – for delays, user inputs, and graceful exits
 
-*Carpets and files*
+**Carpets and files:**
+
+- *test_modules:* It contains the corresponding code to probe each one of the sensors and its correct functioning along with the visualization of the parameters sensed.
+- *complete_functioning:* It contains the main program for the complete system functioning, where all the sensors work together to maeasure the variables mentioned above. The results are shown in the LCD and are updated every 5 seconds.
+
+## Compilation and results: 
+
+Inmediately, the raspberry pi is going to start the system and it can be seen in the LCD the weather variables desired. 
+
+**image of the LCD**
+
+The system starts right when the raspberry is on, but there is an option to test each one of the sensors acceding through "**command**" and it displays a short menu where it can be chosen what sensor to test. 
+**Image of the menu and the LCD for each one of the sensors**
+
+
+
 
 
