@@ -44,4 +44,21 @@
 
 - Initializes the LCD using I2C (address 0x27).
 
+### To check if the libraries are correct installed:
+
+`check_module(name)`: 
+A helper function to check if a given Python module is installed on the system.
+
+- Input: A string with the module name (e.g., 'adafruit_dht')
+
+**Process:**
+
+- Tries to import the module using __import__()
+
+- If successful, prints a checkmark and returns True
+
+- If not installed, prints a red and returns False
+
+- Purpose: Quickly validate critical modules without crashing the main script.
+
 - Displays a simple test message across two lines.
