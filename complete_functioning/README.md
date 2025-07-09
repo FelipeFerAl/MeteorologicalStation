@@ -23,18 +23,7 @@ This function continuously reads and displays data from all connected sensors an
 
 ---
 
-#### **Key Components**
-
-| Sensor/Device | Description                       | Connection            |
-| ------------- | --------------------------------- | --------------------- |
-| `DHT11`       | Temperature and humidity via GPIO | `board.D23` (GPIO 23) |
-| `BMP280`      | Pressure and temperature via I2C  | Address `0x77`        |
-| `YL-38`       | Rain sensor (digital read)        | GPIO `24`             |
-| `CharLCD`     | I2C 16x2 LCD display              | I2C Address `0x27`    |
-
----
-
-#### 🛠**Flow Description**
+#### **Flow Description**
 
 ```python
 # Initialize all devices
