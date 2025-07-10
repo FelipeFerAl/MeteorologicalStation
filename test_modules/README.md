@@ -1,4 +1,4 @@
-## This carpet contains the files associated to the testing of each one of the sensors and the correct installation of the libraries:
+## This space contains the files associated to the testing of each one of the sensors and the correct installation of the libraries:
 
 ### Function for testing the DHT11 sensor: 
 
