@@ -1,4 +1,4 @@
-# Final Project Embedded Linux Systems Programming: Metheorological Station 
+# Embedded Linux Systems Programming Final Project : Metheorological Station 
 
 ## Authors: 
 - Felipe Fernández Alzate - C.C.1056120378
@@ -39,13 +39,15 @@ This project is a compact and affordable weather station built using a Raspberry
 
 **BMP280 (Temperature & Pressure, I2C mode)**
   
-- VIN → 3.3V
+- VIN → 5V
   
 - GND → GND
   
 - SCL → GPIO 3 (I2C SCL)
   
 - SDA → GPIO 2 (I2C SDA)
+
+- DO → 5V
 
 - Default I2C address used: 0x77
 
