@@ -75,7 +75,7 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 ### Hardware Implementation:
 
-
+![esquemático proyecto_bb](https://github.com/user-attachments/assets/1af8894a-34fd-43fd-b133-a3bef7abf41c)
 
 ### Software Configuration: 
 
@@ -93,10 +93,10 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 - `time, sys` – for delays, user inputs, and graceful exits
 
-**Carpets and files:**
+**Files:**
 
 - *test_modules:* It contains the corresponding code to probe each one of the sensors and its correct functioning along with the visualization of the parameters sensed.
-- *complete_functioning:* It contains the main program for the complete system functioning, where all the sensors work together to maeasure the variables mentioned above. The results are shown in the LCD and are updated every 5 seconds.
+- *complete_functioning:* It contains the main program for the complete system functioning, where all the sensors work together to measure the variables mentioned above. The results are shown in the LCD and are updated every 5 seconds.
 
 ## Compilation and results: 
 
