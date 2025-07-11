@@ -7,9 +7,6 @@ from RPLCD.i2c import CharLCD
 def test_dht11():
     # Initial the dht device, with data pin connected to:
     dhtDevice = adafruit_dht.DHT11(board.D23)
-    #Inicializa LCD
-    lcd = CharLCD(i2c_expander='PCF8574',address=0x27,port=1,cols=16, 
-                  dotsize=8, charmap='A00',auto_linebreaks=True)
     
     try:
         while True:
@@ -17,10 +14,6 @@ def test_dht11():
                 temperature_c = dhtDevice.temperature
                 humidity = dhtDevice.humidity
                 print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}% ")
-                #muestra en pantalla LCD
-                lcd.clear()
-                lcd.write_string(f"T:{temperature_c:.1f}C H:{humidity}%")
-                lcd.crlf()
 
             except RuntimeError as error:
                 print(error.args[0])
@@ -35,13 +28,6 @@ def test_bmp280():
         import board
         import adafruit_bmp280
 
-        # Initialize I2C bus
-        i2c = board.I2C()
-
-        #inicializa la pantalla LCD
-        lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16,
-                       rows=2, dotsize=8, charmap='A00', auto_linebreaks=True)
-
         # Create BMP280 object
         bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c,address=0x77)
 
@@ -49,12 +35,7 @@ def test_bmp280():
             temp = bmp.temperature
             pressure = bmp.pressure
             print(f"Temp: {temp:.1f} C    Pressure: {pressure:.1f}hPa")
-   
-            lcd.cursor_pos=(0,0)
-            lcd.write_string(f"T:{temp:.1f}c ")
-            lcd.cursor_pos=(1,0)
-            lcd.write_string(f"P:{int(pressure)}hPa ")      
-         
+            
             time.sleep(5.0)
   
   
@@ -66,9 +47,6 @@ def test_rain_sensor():
     try:
         import RPi.GPIO as GPIO
 
-        lcd=CharLCD(i2c_expander='PCF8574', address=0x27, cols=16, 
-                    rows=2, dotsize=8, charmap='A00', auto_linebreaks=True)        
-
         RAIN_PIN = 24
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(RAIN_PIN, GPIO.IN)
@@ -79,10 +57,6 @@ def test_rain_sensor():
         time.sleep(2)
         GPIO.cleanup()
        
-        #Mostrar en LCD 
-        lcd.cursos_pos = (1,0)
-        lcd.write_string(f"R:{lluvia:<14}")
-
         time.sleep(1)
     except Exception as e:
         print(f"\n❌ Error con sensor de lluvia: {e}\n")
@@ -96,12 +70,7 @@ def test_lcd():
                       cols=16, rows=2, dotsize=8,
                       charmap='A00', auto_linebreaks=True)
 
-        lcd.clear()
-        lcd.write_string("LCD Funcionando")
-        lcd.crlf()
-        lcd.write_string("Test exitoso :D")
         print("\n✅ LCD OK - LCD FUNCIONANDO.\n")
-        time.sleep(3)
     except Exception as e:
         print(f"\n❌ Error con LCD: {e}\n")
 
