@@ -1,36 +1,37 @@
+import json
+import os
 import time
 import sys
-import board
-import adafruit_dht
-from RPLCD.i2c import CharLCD
+from sensors_modules import dhtDevice, bmp, RAIN_PIN, lcd
+from sensors_modules import dht_temperature, dht_humidity
 
 def test_dht11():
-    # Initial the dht device, with data pin connected to:
-    dhtDevice = adafruit_dht.DHT11(board.D23)
-    
     try:
-        while True:
-            try:
-                temperature_c = dhtDevice.temperature
-                humidity = dhtDevice.humidity
-                print(f"Temp: {temperature_c:.1f} C    Humidity: {humidity}% ")
+        path="/tmp/sensor_data.json"
+        if not os.path.exists(path):
+            print("No hay archivo con datos\n")
+            return
+            
+        with open(path, "r") as f:
+            data = json.load(f)
+            temp = data.get("dht_temperature")
+            hum = data.get("dht_humidity")
+    finally: 
+        try:
+            while True:
+                if temp is not None and hum is not None:
+                    print(f"✅ DHT11 OK - Temp: {temp}, Hum: {hum}")
+                else:
+                    print("⚠️  DHT11 data not available yet.")
 
-            except RuntimeError as error:
-                print(error.args[0])
-            time.sleep(5.0)
+                time.sleep(5)
 
-    except KeyboardInterrupt:
-        print("\n[✔] Lectura de DHT11 interrumpida por el usuario.")
+        except KeyboardInterrupt:
+            print("\n[✔] Lectura de DHT11 interrumpida por el usuario.")
 
 
 def test_bmp280():
     try:
-        import board
-        import adafruit_bmp280
-
-        # Create BMP280 object
-        bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c,address=0x77)
-
         while True:
             temp = bmp.temperature
             pressure = bmp.pressure
@@ -64,13 +65,10 @@ def test_rain_sensor():
 
 def test_lcd():
     try:
-        from RPLCD.i2c import CharLCD
-
-        lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1,
-                      cols=16, rows=2, dotsize=8,
-                      charmap='A00', auto_linebreaks=True)
-
-        print("\n✅ LCD OK - LCD FUNCIONANDO.\n")
+        if lcd != None:
+            print("\n✅ LCD OK - LCD FUNCIONANDO.\n")
+        else:
+            print("\nError con LCD.\n")
     except Exception as e:
         print(f"\n❌ Error con LCD: {e}\n")
 

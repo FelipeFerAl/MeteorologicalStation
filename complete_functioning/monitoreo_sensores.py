@@ -1,56 +1,51 @@
 import time
-import board
-import adafruit_dht
-import adafruit_bmp280
+import sys
+import os
 import RPi.GPIO as GPIO
-from RPLCD.i2c import CharLCD
+import json
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'test_modules')))
+import sensors_modules
 
 def run_all_sensors():
     try:
-        # Inicializa sensores
-        dhtDevice = adafruit_dht.DHT11(board.D23)
-        i2c = board.I2C()
-        bmp = adafruit_bmp280.Adafruit_BMP280_I2C(i2c, address=0x77)
+        # ✅ Initialize all sensors once
+        sensors_modules.init_all_sensors()
 
-        # Sensor de lluvia
-        RAIN_PIN = 24
-        GPIO.setmode(GPIO.BCM)
-        GPIO.setup(RAIN_PIN, GPIO.IN)
-
-        # LCD
-        lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1,
-                      cols=16, rows=2, dotsize=8,
-                      charmap='A00', auto_linebreaks=True)
-
-        print("\n[✔] Monitoreo activo. Presiona Ctrl+C para detener.\n")
+        # ✅ Access the initialized objects
+        dhtDevice = sensors_modules.dhtDevice
+        bmp = sensors_modules.bmp
+        lcd = sensors_modules.lcd
+        RAIN_PIN = sensors_modules.RAIN_PIN
 
         while True:
             try:
                 # DHT11
                 temp_dht = dhtDevice.temperature
                 humedad = dhtDevice.humidity
+                data = {
+                    "dht_temperature": temp_dht,
+                    "dht_humidity": humedad
+                }
+                with open("/tmp/sensor_data.json", "w") as f:
+                    json.dump(data, f)
 
                 # BMP280
                 temp_bmp = bmp.temperature
                 presion = bmp.pressure
 
-                # Sensor de lluvia
+                # Rain Sensor
                 lluvia = "SI" if GPIO.input(RAIN_PIN) == 0 else "NO"
 
-                # Consola
-                print(f"DHT11  → T:{temp_dht:.1f}C  H:{humedad}%")
-                print(f"BMP280 → T:{temp_bmp:.1f}C  P:{int(presion)}hPa")
-                print(f"Lluvia → R:{lluvia}")
-                print("-" * 35)
-
-                # LCD rotativa
+                # Display on LCD
                 lcd.clear()
-                lcd.cursor_pos=(0,0)
+                lcd.cursor_pos = (0, 0)
                 lcd.write_string(f"T:{temp_bmp:.1f}  P:{int(presion)}hPa")
-                lcd.cursor_pos=(1,0)
+                lcd.cursor_pos = (1, 0)
                 lcd.write_string(f"R:{lluvia:>2}  H:{humedad}%")
+
                 time.sleep(5)
-              
+
             except RuntimeError as e:
                 print(f"[!] Error lectura DHT11: {e}")
                 time.sleep(2)
@@ -63,6 +58,6 @@ def run_all_sensors():
         lcd.clear()
         GPIO.cleanup()
 
+
 if __name__ == "__main__":
     run_all_sensors()
-
