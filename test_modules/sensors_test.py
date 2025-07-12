@@ -75,6 +75,7 @@ def test_lcd():
 
 def main_menu():
     while True:
+        os.system('clear')
         print("=== Menú de Pruebas de Sensores ===")
         print("1. Probar DHT11 (Temp y Humedad)")
         print("2. Probar BMP280 (Temp y Presión)")
