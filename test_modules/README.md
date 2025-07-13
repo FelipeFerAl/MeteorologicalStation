@@ -1,4 +1,4 @@
-## This space contains the files associated to the testing of each one of the sensors, the module to create each sensor object and the correct installation of the libraries:
+## This space contains the files associated to the testing of each one of the sensors and the module to create each sensor object:
 
 ### How the sensors_modules work:
 It basically initializes the objects each sensor needs so the Raspberry can take the information provided via GPIO pins or I2C channel. This module is called by the sensors_test and monitoreo_sensores files as they work at the same time with the same sensors, so we just avoid overwriting or problems with GPIO activations (especially the one connected with the DHT11 sensor)
