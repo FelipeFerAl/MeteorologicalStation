@@ -79,8 +79,11 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 #### Variables: 
 **T** --> Temperature 
+
 **P** --> Atmospheric pressure 
+
 **H** --> Humidity
+
 **R** --> Rain
 
 <img width="1574" height="890" alt="image" src="https://github.com/user-attachments/assets/6a5d72c3-7f6f-4ca4-abde-f0d4773da60f" />
