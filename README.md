@@ -77,15 +77,6 @@ The sensor sends LOW when it detects rain. No need for analog input.
 
 ![esquemático proyecto_bb](https://github.com/user-attachments/assets/1af8894a-34fd-43fd-b133-a3bef7abf41c)
 
-#### Variables: 
-**T** --> Temperature 
-
-**P** --> Atmospheric pressure 
-
-**H** --> Humidity
-
-**R** --> Rain
-
 <img width="1574" height="890" alt="image" src="https://github.com/user-attachments/assets/6a5d72c3-7f6f-4ca4-abde-f0d4773da60f" />
 
 <img width="1600" height="820" alt="image" src="https://github.com/user-attachments/assets/3aad08ec-2301-4216-999d-7c9500a12603" />
@@ -117,9 +108,16 @@ Inmediately, the raspberry pi is going to start the system and it can be seen in
 
 <img width="1484" height="676" alt="image" src="https://github.com/user-attachments/assets/8c5ed0ef-6b2b-4d41-9f66-1c25ca26e068" />
 
-While the LCD shows the parameteres measure by the sensors, it is possible to test each one of the sensors through the console. For that, the code counts with a menu option and the possibility of verify the results, as it can be seen in the next image: 
+#### Variables: 
+**T** --> Temperature 
 
-**Image of the menu and each one of the results**
+**P** --> Atmospheric pressure 
+
+**H** --> Humidity
+
+**R** --> Rain
+
+While the LCD shows the parameteres measure by the sensors, it is possible to test each one of the sensors through the console. For that, the code counts with a menu option and the possibility of verify the results.
 
 
 
