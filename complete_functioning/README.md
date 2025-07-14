@@ -68,15 +68,6 @@ Note: To avoid conflicts between the readings of the sensor DHT11 and the displa
   * Rain sensor: digital status (LOW = rain)
 
 ```python
-# Display in terminal
-print(f"DHT11  → T:{temp_dht:.1f}C  H:{humedad}%")
-print(f"BMP280 → T:{temp_bmp:.1f}C  P:{int(presion)}hPa")
-print(f"Lluvia → R:{lluvia}")
-```
-
-* Displays readable data in the console for monitoring.
-
-```python
 # Display in LCD
 lcd.clear()
 lcd.cursor_pos=(0,0)
