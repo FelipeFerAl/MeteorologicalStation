@@ -120,7 +120,9 @@ Inmediately, the raspberry pi is going to start the system and it can be seen in
 While the LCD shows the parameteres measure by the sensors, it is possible to test each one of the sensors through the console. For that, the code counts with a menu option and the possibility of verify the results.
 
 
+## Validation:
 
+<img width="1729" height="430" alt="image" src="https://github.com/user-attachments/assets/bc9e3892-8bdf-48fa-9989-89f3df253b5e" />
 
 
 
