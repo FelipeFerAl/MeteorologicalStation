@@ -8,7 +8,7 @@
 
 This project is a compact and affordable weather station built using a Raspberry Pi Zero, designed to monitor basic environmental conditions in real time. It integrates multiple sensors and displays the data both on the console and an I2C LCD screen.
 
-## Learning Objectives:
+## Objectives:
 
 - Apply all the knowledgment learned during the semester, like the configuration of the environment for the raspberry pi using Linux and implementation of servers and functions.
 - Programming a functional Weather Station using several sensors occupied to measure temperature, atmospheric prssure, humidity and presence of rain. 
@@ -26,6 +26,14 @@ This project is a compact and affordable weather station built using a Raspberry
 - The system starts right when the raspberry is on and the sensors asociated start to measure the desire variables.
 
 ## Project Structure: 
+
+### How to install?:
+
+- Clone this repository via "git clone https://github.com/FelipeFerAl/MeteorologicalStation.git"
+- Check the Adafruit dependencies and sensor installation on "https://github.com/adafruit/Adafruit_CircuitPython_BMP280.git", follow the instructions to install all necessary items
+- Install python libraries on device --> "sudo apt install python3"
+- Run main code inside project folder --> "python3 complete_functioning/monitoreo_sensores.py"
+- In case you want to activate a service you shall create a service file (.sh) into your system folder which calls the main script. We recommend this tutorial to know everything about services creation: "https://documentation.suse.com/smart/systems-management/html/systemd-setting-up-service/index.html"
 
 ### Hardware Connections (GPIO and I2C)
 
